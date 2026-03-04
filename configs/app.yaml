@@ -1,0 +1,4 @@
+app_name: CodexVideos
+environment: dev
+default_model_provider: mock
+output_dir: outputs

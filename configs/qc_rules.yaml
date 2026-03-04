@@ -1,0 +1,8 @@
+pass_score: 70
+summary_phrases:
+  - 那一刻我终于明白
+  - 总之
+repetition:
+  min_occurrence: 2
+paragraph:
+  max_chars: 180
