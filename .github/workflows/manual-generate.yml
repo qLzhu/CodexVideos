@@ -1,0 +1,41 @@
+name: Manual Generate
+
+on:
+  workflow_dispatch:
+    inputs:
+      job_config:
+        description: 'Job config path'
+        required: true
+        default: 'configs/jobs/generate_outline.yaml'
+      dry_run:
+        description: 'Dry run'
+        required: true
+        default: false
+        type: boolean
+      model_provider:
+        description: 'Model provider override (optional)'
+        required: false
+        default: ''
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --upgrade pip
+          pip install -e .[dev]
+      - name: Run generate
+        run: |
+          ARGS="--config ${{ github.event.inputs.job_config }}"
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          if [ -n "${{ github.event.inputs.model_provider }}" ]; then ARGS="$ARGS --model-provider ${{ github.event.inputs.model_provider }}"; fi
+          python -m app.cli run generate $ARGS
+      - name: Upload outputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: outputs-manual-generate
+          path: outputs/

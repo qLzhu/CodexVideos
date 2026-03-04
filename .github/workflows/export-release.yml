@@ -1,0 +1,27 @@
+name: Export Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_dir:
+        description: 'Run directory path, e.g. outputs/run-20250101-120000'
+        required: true
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --upgrade pip
+          pip install -e .[dev]
+      - name: Export
+        run: python -m app.cli export results --run-dir "${{ github.event.inputs.run_dir }}"
+      - name: Upload outputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: outputs-export-release
+          path: outputs/

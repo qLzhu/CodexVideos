@@ -1,0 +1,5 @@
+name: qc_demo_project
+type: qc
+project: demo_project
+input_file: projects/demo_project/sample_script.md
+qc_rules_file: configs/qc_rules.yaml

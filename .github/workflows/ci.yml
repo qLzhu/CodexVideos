@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .[dev]
+
+      - name: Lint placeholder
+        run: |
+          echo "No strict linter configured in MVP."
+
+      - name: Run tests
+        run: pytest -q
+
+      - name: Template validate smoke
+        run: |
+          python -m app.cli template validate --template templates/drama/outline_prompt.md --vars '{"project_name":"A","genre":"悬疑","target_audience":"18+","core_conflict":"冲突"}'

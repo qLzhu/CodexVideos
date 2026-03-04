@@ -1,0 +1,11 @@
+name: generate_outline_demo
+type: generate
+template: templates/drama/outline_prompt.md
+project: demo_project
+variables:
+  project_name: 逆光追凶
+  genre: 悬疑
+  target_audience: 18-35岁
+  core_conflict: 真相与亲情的冲突
+output_name: outline_result
+model_provider: mock

@@ -1,0 +1,10 @@
+name: generate_episode_demo
+type: generate
+template: templates/drama/episode_prompt.md
+project: demo_project
+variables:
+  episode_no: 1
+  protagonist: 林夏
+  turning_point: 主角发现关键监控被篡改
+output_name: episode_result
+model_provider: mock

@@ -1,0 +1,9 @@
+default_provider: mock
+providers:
+  mock:
+    model_name: mock-echo
+    params:
+      suffix: "[MOCK-GENERATED]"
+  echo:
+    model_name: echo
+    params: {}
