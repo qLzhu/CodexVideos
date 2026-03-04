@@ -7,3 +7,5 @@ outputs/*
 data/*
 !data/.gitkeep
 .env
+web/node_modules/
+web/dist/
